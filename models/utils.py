@@ -254,6 +254,8 @@ def seg_postprocess(
     masks = masks.transpose([1, 2, 0])
     masks = cv2.resize(masks, (shape[1], shape[0]),
                        interpolation=cv2.INTER_LINEAR)
+    if len(masks.shape) == 2:
+        masks = masks[..., None]    # add new axis as (640, 640 ,1)
     masks = masks.transpose(2, 0, 1)
     masks = np.ascontiguousarray((masks > 0.5)[..., None], dtype=np.float32)
     return bboxes, scores, labels, masks

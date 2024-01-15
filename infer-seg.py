@@ -80,8 +80,8 @@ def main(args: argparse.Namespace) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument('--engine', type=str, help='Engine file')
-    parser.add_argument('--imgs', type=str, help='Images file')
+    parser.add_argument('--engine', type=str, help='Engine file', default="./yolov8m_seg_schedl.engine")
+    parser.add_argument('--imgs', type=str, help='Images file', default="./data")
     parser.add_argument('--show',
                         action='store_true',
                         help='Show the detection results')
