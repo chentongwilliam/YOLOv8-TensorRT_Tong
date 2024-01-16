@@ -1,0 +1,22 @@
+
+RTX 3090Ti + 12th Gen Intel® Core™ i9-12900K × 24:
+
+	With Torch:
+
+		Total FPS: 8.67
+		Average Loading Time: 0.032 seconds
+		Average Preprocessing Time: 0.004 seconds
+		Average Inference Time: 0.003 seconds
+		Average Postprocessing Time: 0.007 seconds
+		Average Saving Time: 0.069 seconds
+
+	Without Torch:
+	
+		Total FPS: 6.46
+		Average Loading Time: 0.030 seconds
+		Average Preprocessing Time: 0.003 seconds
+		Average Inference Time: 0.003 seconds
+		Average Postprocessing Time: 0.025 seconds
+		Average Saving Time: 0.093 seconds
+
+
