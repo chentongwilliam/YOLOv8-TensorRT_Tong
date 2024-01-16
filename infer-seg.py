@@ -5,6 +5,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 import torch
+import time
 
 from config import ALPHA, CLASSES, COLORS, MASK_COLORS
 from models.torch_utils import seg_postprocess
@@ -25,7 +26,12 @@ def main(args: argparse.Namespace) -> None:
     if not args.show and not save_path.exists():
         save_path.mkdir(parents=True, exist_ok=True)
 
+    frame_count = 0
+    start_time = time.time()
+
     for image in images:
+        loop_start_time = time.time()
+        
         save_image = save_path / image.name
         bgr = cv2.imread(str(image))
         draw = bgr.copy()
@@ -76,6 +82,15 @@ def main(args: argparse.Namespace) -> None:
             cv2.waitKey(0)
         else:
             cv2.imwrite(str(save_image), draw)
+            
+        frame_count += 1
+        loop_end_time = time.time()
+        loop_fps = 1.0 / (loop_end_time - loop_start_time)
+        print(f"Loop FPS: {loop_fps:.2f}")
+    
+    current_time = time.time()
+    fps = frame_count / (current_time - start_time)
+    print(f"Total FPS: {fps:.2f}")
 
 
 def parse_args() -> argparse.Namespace:
