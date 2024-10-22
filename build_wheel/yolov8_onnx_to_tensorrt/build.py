@@ -1,6 +1,6 @@
 import argparse
 
-from models import EngineBuilder
+from yolov8_onnx_to_tensorrt.models import EngineBuilder
 
 
 def parse_args():
@@ -41,16 +41,17 @@ def parse_args():
     return args
 
 
-def main(args):
+def main():
+    args = parse_args()
     builder = EngineBuilder(args.weights, args.device)
     builder.seg = args.seg
-    builder.build(fp16=args.fp16,
-                  input_shape=args.input_shape,
-                  iou_thres=args.iou_thres,
-                  conf_thres=args.conf_thres,
-                  topk=args.topk)
+    builder.build(
+        fp16=args.fp16,
+        input_shape=args.input_shape,
+        iou_thres=args.iou_thres,
+        conf_thres=args.conf_thres,
+        topk=args.topk)
 
 
 if __name__ == '__main__':
-    args = parse_args()
-    main(args)
+    main()

@@ -1,4 +1,6 @@
 
+docker run -it --rm --ipc=host --gpus all -v /home/chentong/Documents/DeepLearning/Data:/opt/Data -w /opt/Data chentong/tensorrt_24.02-ultralytics_8.2.32
+
 1. Export Modified ONNX model:
 
 python3 export-seg.py \

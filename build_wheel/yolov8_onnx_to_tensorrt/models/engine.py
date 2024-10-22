@@ -31,12 +31,12 @@ class EngineBuilder:
         self.device = device
 
     def __build_engine(self,
-                       fp16: bool = True,
-                       input_shape: Union[List, Tuple] = (1, 3, 640, 640),
-                       iou_thres: float = 0.65,
-                       conf_thres: float = 0.25,
-                       topk: int = 100,
-                       with_profiling: bool = True) -> None:
+            fp16: bool = True,
+            input_shape: Union[List, Tuple] = (1, 3, 640, 640),
+            iou_thres: float = 0.65,
+            conf_thres: float = 0.25,
+            topk: int = 100,
+            with_profiling: bool = True) -> None:
         logger = trt.Logger(trt.Logger.WARNING)
         trt.init_libnvinfer_plugins(logger, namespace='')
         builder = trt.Builder(logger)
