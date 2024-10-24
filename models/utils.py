@@ -208,8 +208,8 @@ def det_postprocess(data: Tuple[ndarray, ndarray, ndarray, ndarray]):
     # check score negative
     scores[scores < 0] = 1 + scores[scores < 0]
     # add nms
-    idx = nms(bboxes, scores, iou_thres)
-    bboxes, scores, labels = bboxes[idx], scores[idx], labels[idx]
+    # idx = nms(bboxes, scores, iou_thres)
+    # bboxes, scores, labels = bboxes[idx], scores[idx], labels[idx]
 
     bboxes = bboxes[:nums]
     scores = scores[:nums]

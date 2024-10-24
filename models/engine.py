@@ -41,8 +41,8 @@ class EngineBuilder:
         trt.init_libnvinfer_plugins(logger, namespace='')
         builder = trt.Builder(logger)
         config = builder.create_builder_config()
-        config.max_workspace_size = torch.cuda.get_device_properties(
-            self.device).total_memory
+        total_memory = torch.cuda.get_device_properties(self.device).total_memory
+        config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, int(total_memory * 0.75))
         flag = (1 << int(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH))
         network = builder.create_network(flag)
 
@@ -59,8 +59,16 @@ class EngineBuilder:
 
         if with_profiling:
             config.profiling_verbosity = trt.ProfilingVerbosity.DETAILED
-        with self.builder.build_engine(self.network, config) as engine:
-            self.weight.write_bytes(engine.serialize())
+            
+        # # deprecated:
+        # with self.builder.build_engine(self.network, config) as engine:
+        #     self.weight.write_bytes(engine.serialize())
+            
+        # new: not tested:
+        serialized_engine = self.builder.build_serialized_network(self.network, config)
+        with open(self.weight, "wb") as f:
+            f.write(serialized_engine)
+            
         self.logger.log(
             trt.Logger.WARNING, f'Build tensorrt engine finish.\n'
             f'Save in {str(self.weight.absolute())}')
