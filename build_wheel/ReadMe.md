@@ -68,7 +68,7 @@
     
     这样，外部可以直接调用 `yolov8_convert_trt` 命令行工具，而不需要依赖仓库内的路径。
     
-4. **安装包：**
+4. **Option 1 不生成安装包：**
     
     在 `YOLOv8-TensorRT` 文件夹中运行以下命令：
     
@@ -82,6 +82,18 @@
     ```bash
     yolov8_convert_trt --weights path/to/your/model.onnx --fp16
     ```
+
+5. **Option 2 生成安装包:**
+    使用 python -m build 来打包项目
+    ```bash
+    pip3 install build
+    ```
+
+    运行 python -m build： 在项目根目录下运行：
+    ```bash
+    python3 -m build
+    ```
+    这将自动执行你的 setup.py 文件，并在 dist 文件夹下生成打包文件，包括 .whl 和 .tar.gz 格式的包。
     
 
 ### 方法2: 通过相对路径来调用仓库
