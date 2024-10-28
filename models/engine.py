@@ -74,12 +74,12 @@ class EngineBuilder:
             f'Save in {str(self.weight.absolute())}')
 
     def build(self,
-              fp16: bool = True,
-              input_shape: Union[List, Tuple] = (1, 3, 640, 640),
-              iou_thres: float = 0.65,
-              conf_thres: float = 0.25,
-              topk: int = 100,
-              with_profiling=True) -> None:
+            fp16: bool = True,
+            input_shape: Union[List, Tuple] = (1, 3, 640, 640),
+            iou_thres: float = 0.65,
+            conf_thres: float = 0.25,
+            topk: int = 100,
+            with_profiling=True) -> None:
         self.__build_engine(fp16, input_shape, iou_thres, conf_thres, topk,
                             with_profiling)
 
